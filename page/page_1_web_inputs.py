@@ -22,11 +22,6 @@ class Page1WebInputs(BasePage):
     output_date = ('xpath', '//strong[@id="output-date"]')
 
 
-    def click_button(self, button):
-        self.wait.until(EC.element_to_be_clickable(button)).click()
-
-    def click_input_and_send_keys(self, input, text):
-        self.wait.until(EC.element_to_be_clickable(input)).send_keys(text)
 
     def get_value_from_output(self, output):
         value = self.wait.until(EC.visibility_of_element_located(output)).text
