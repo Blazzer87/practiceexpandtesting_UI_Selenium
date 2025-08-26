@@ -1,2 +1,15 @@
-запуск через
-docker-compose up
+Как теперь запускать
+
+Первый чистый прогон (после правок зависимостей):
+docker compose build --no-cache
+docker compose run --rm mytest
+
+Повторные прогоны (код не меняли / образ не пересобираем):
+docker compose run --rm mytest
+или с доп. аргами:
+docker compose run --rm mytest -k "smoke and not slow" --maxfail=1
+
+Если меняли только тесты/код (а не зависимости) — никакой сборки не нужно: volume уже монтирует свежий код.
+
+Если меняли зависимости (requirements.txt/Dockerfile) — пересобираем:
+docker compose build --no-cache

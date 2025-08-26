@@ -1,16 +1,17 @@
-
-
 services:
   mytest:
     build:
       context: .
       dockerfile: Dockerfile
-    image: practiceexpandtesting-ui-selenium:latest   # <— своё имя образа
-    working_dir: /app                                 # <— одна рабочая папка
+    image: practiceexpandtesting-ui-selenium:latest
+    working_dir: /app
     volumes:
-      - ./:/app                                       # монтируем проект (перебьёт COPY — это ок)
-    command: >
-      sh -lc "ls -la && python -m pytest -sv --alluredir=allure-results"
+      - ./:/app
+    entrypoint: ["python", "-m", "pytest"]
+    command: ["-sv", "--alluredir=allure-results"]
+
+
+
 #    environment:
 #      - LOGIN=${LOGIN}
 #      - PASSWORD=${PASSWORD}
